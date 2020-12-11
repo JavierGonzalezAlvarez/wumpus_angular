@@ -25,3 +25,32 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+#----------------------------------------------------------
+
+Juego del wumpus
+Version Front en Angular - existe una version creada en python en este mismo repositorio
+Autor: Javier González
+Fecha: 12/12/2020
+--------------------------------------------------------------------------------------------
+
+Instalar angular
+-----------------------
+$ npm angular -g @angular/cli
+
+crear proyecto
+-----------------------
+$ ng new wumpus --skipTests=true
+routing: y
+style: scss
+
+cd wumpus
+
+
+
+
+
+
+
+
+
