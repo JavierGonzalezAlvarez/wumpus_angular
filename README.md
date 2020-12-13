@@ -28,24 +28,77 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 #----------------------------------------------------------
 
-Juego del wumpus
-Version Front en Angular - existe una version creada en python en este mismo repositorio
-Autor: Javier González
-Fecha: 12/12/2020
+# Juego del wumpus
+#  Version Front en Angular - existe una version creada en python en este mismo repositorio
+# Autor: Javier González
+# IDE: VSC
+# Entorno: ubuntu 20.04
+# Fecha: 12/12/2020
+# version: 1.0
 --------------------------------------------------------------------------------------------
 
-Instalar angular
------------------------
+#  Instalar angular - realizado en version 9.0.6 que es la que tengo en local
+-----------------------------------------------------
+# instalar la ultima version
 $ npm angular -g @angular/cli
 
-crear proyecto
+#  crear proyecto
 -----------------------
 $ ng new wumpus --skipTests=true
-routing: y
-style: scss
+-routing: y
+-style: scss
 
-cd wumpus
+#  crear componentes header, body y footer
+-----------------------------------------
+cd src/app
+$ ng g component components/header
+$ ng g component components/body
+$ ng g component components/footer
 
+# crear carpeta icons
+-------------------------
+wumpus/src/assets/icons
+
+# crear carpeta img
+-------------------------
+incorporar imagen de wumpus sacada de google
+wumpus/src/assets/img
+
+# cambiar favicon
+-------------------------
+angular.json
+index.html
+
+# crear componente help
+---------------------------
+$ ng g component components/help
+
+# instalar materuial design
+-----------------------------
+ng add @angular/material
+-indigo/pink
+-y
+-y
+
+index.html, añadir:
+ <link href=”https://fonts.googleapis.com/icon?family=Material+Icons” rel=”stylesheet”>  
+
+app.module.ts, añadir:
+import {MatIconModule} from '@angular/material/icon';
+MatIconModule,
+
+listado:
+https://www.softaox.info/1000-angular-material-icons-list-mat-icon/
+
+# crear directorio clases
+app/clases
+
+# crear servicio nav (barra navegador menu)
+crear carpeta servicios - comunicación entre componentes
+src/app/services
+
+$ src/app/services/ng generate service nav
+$ src/app/services/ng generate service mensajes
 
 
 

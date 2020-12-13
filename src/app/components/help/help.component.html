@@ -1,11 +1,15 @@
 <div class="instruccions">
+    <button id="bottonheaders" (click)="navService.clickBack()">                
+        <mat-icon> chevron_left </mat-icon>
+        Volver
+    </button>
     <h2>Instrucciones</h2>
     <hr>
     <p>
         <strong>Acciones</strong><br>
-        Avanzar, avanzar a la derecha y avanzar a la izquierda.
+        Avanzar, retroceder, girar a la derecha y a la izquierda.
         El cazador está situado en la dirección de la numeración de las casillas. 
-        Opcional: comentar donde pueden estar los peligros si se quiere probar suerte!!
+        Tecla F12 para ver los mensjaes desde consola
     </p>
     
     <p>
@@ -26,13 +30,13 @@
     
     <p>
         <strong>Actores:</strong><br>            
-        wumpus - cazador - pozo_1 - pozo_2 - pozo_3 - oro
+        wumpus - cazador - pozo_1 - pozo_2 - oro
     </p>
 
     La grilla en la que se juega está formada por estas celdas en este orden:
-    16, 15 ,14 13
-    9, 10, 11, 12
-    8,  7,  6,  5
-    1,  2,  3,  4    
+     1,  2,  3,  4
+     5,  6,  7,  8
+     9, 10, 11, 12
+    13, 14, 15, 16    
 </div>
 

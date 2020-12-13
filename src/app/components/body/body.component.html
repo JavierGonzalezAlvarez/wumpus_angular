@@ -1,1 +1,38 @@
-<p>body works!</p>
+<h2>Grilla</h2>
+
+<div>
+  <table id="table">
+    
+    <tbody>
+    
+      <tr *ngFor="let fila_1 of fila1" id="a">
+        <td *ngFor="let celda of fila_1">                    
+          {{celda}}
+        </td>
+      </tr>
+
+      <tr *ngFor="let fila_2 of fila2" >
+        <td *ngFor="let celda of fila_2">
+          {{celda}}
+        </td>
+      </tr>
+
+      <tr *ngFor="let fila_3 of fila3" >
+        <td *ngFor="let celda of fila_3">
+          {{celda}}
+        </td>
+      </tr>
+
+      <tr *ngFor="let fila_4 of fila4" >
+        <td *ngFor="let celda of fila_4">
+          {{celda}}
+        </td>
+      </tr>
+
+    </tbody>  
+  </table>
+</div>
+
+
+
+

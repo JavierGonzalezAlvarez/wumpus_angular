@@ -1,0 +1,21 @@
+
+#table td {
+    border: 1px solid #ddd;
+    padding: 28px;
+    margin: auto;
+    width: 5%;
+    text-align: center;
+  }
+
+.grid {
+    display: inline-grid;
+    grid-template-columns: repeat(6, 6fr);
+    grid-gap: 3em;
+    grid-auto-rows: minmax(auto, auto);
+    margin: 30px;
+    }
+
+#bottonheaders {
+    background-color: rgb(135, 235, 173);    
+}
+  
