@@ -26,55 +26,43 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-#----------------------------------------------------------
+Juego del wumpus
+Version Front en Angular - existe una version creada en python en este mismo repositorio
+Autor: Javier González
+IDE: VSC
+Entorno: ubuntu 20.04
+Fecha: 12/12/2020
+version: 1.0
 
-# Juego del wumpus
-#  Version Front en Angular - existe una version creada en python en este mismo repositorio
-# Autor: Javier González
-# IDE: VSC
-# Entorno: ubuntu 20.04
-# Fecha: 12/12/2020
-# version: 1.0
---------------------------------------------------------------------------------------------
-
-#  Instalar angular - realizado en version 9.0.6 que es la que tengo en local
------------------------------------------------------
-# instalar la ultima version
+# instalar angular
 $ npm angular -g @angular/cli
 
 #  crear proyecto
------------------------
 $ ng new wumpus --skipTests=true
 -routing: y
 -style: scss
 
 #  crear componentes header, body y footer
------------------------------------------
 cd src/app
 $ ng g component components/header
 $ ng g component components/body
 $ ng g component components/footer
 
 # crear carpeta icons
--------------------------
 wumpus/src/assets/icons
 
 # crear carpeta img
--------------------------
 incorporar imagen de wumpus sacada de google
 wumpus/src/assets/img
 
 # cambiar favicon
--------------------------
 angular.json
 index.html
 
 # crear componente help
----------------------------
 $ ng g component components/help
 
 # instalar materuial design
------------------------------
 ng add @angular/material
 -indigo/pink
 -y
@@ -99,11 +87,4 @@ src/app/services
 
 $ src/app/services/ng generate service nav
 $ src/app/services/ng generate service mensajes
-
-
-
-
-
-
-
 

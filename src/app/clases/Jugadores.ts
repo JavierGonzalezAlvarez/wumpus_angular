@@ -1,8 +1,4 @@
-import { findLast } from '@angular/compiler/src/directive_resolver';
-
-//registramos la clase Grilla
-export class Jugadores  {
-    
+export class Jugadores  {    
     //atributos
     jugadores_inicio: string []
     posicion_inicial: number [][]       

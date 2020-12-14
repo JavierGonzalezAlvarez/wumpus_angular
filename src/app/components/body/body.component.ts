@@ -73,9 +73,9 @@ export class BodyComponent implements OnInit {
     }    
     
     //posicion del cazador
-    this.navService.getPosicion(1)
+    //this.navService.getPosicion(1)
     //obtener json aleatorio
-    this.navService.getJSONaleatorio()    
+    //this.navService.getJSONaleatorio()    
 
   }
 
