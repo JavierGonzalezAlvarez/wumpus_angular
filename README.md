@@ -88,3 +88,44 @@ src/app/services
 $ src/app/services/ng generate service nav
 $ src/app/services/ng generate service mensajes
 
+
+dockerizacion - crear network
+-------------------------------------
+$ docker network create angular-nginx-networks
+crear el dockerfile => Dockerfile
+crear el docker-compose=>  docker-compose.yml
+ejecutar servicios docker-compose => $ docker-compose up --build -d 
+detener servicios docker-compose => docker-compose down
+
+crear imagen desde docker (no docker-compose)
+------------------------------------------------
+docker build -t angular_wumpus .
+
+listar imagenes
+----------------
+docker images
+
+entrar en el contenedor
+----------------------------
+docker container ls
+docker exec -i -t container_id /bin/bash
+
+docker exec -i -t 5b04716490e8 /bin/bash
+dentro del contenedor=> ng serve
+
+puerto 3200 => localhost:3200
+
+en caso de que el puerto 4200 este en uso:
+----------------------------------------------
+matar el proceso anterior o cambiar el puerto por defecto o cambiar de puerto en docker o en comando:
+$ ng serve --port 4201
+
+eliminar todas las imagenes
+-----------------------------
+docker rmi $(docker images -q) 
+
+eliminar todas con contenedores
+--------------------------------
+docker rm $(docker ps -a -q) -f
+
+

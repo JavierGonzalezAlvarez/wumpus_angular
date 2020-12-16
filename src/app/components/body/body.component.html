@@ -1,38 +1,54 @@
 <h2>Grilla</h2>
 
-<div>
-  <table id="table">
+<div *ngIf="isTrue">
     
-    <tbody>
-    
-      <tr *ngFor="let fila_1 of fila1" id="a">
-        <td *ngFor="let celda of fila_1">                    
-          {{celda}}
-        </td>
+  <table id="table">    
+    <tbody>   
+      <tr *ngFor="let c_1 of c1">      
+        <td *ngFor="let celda1 of c_1">                                                  
+          <div *ngIf="celda1[0]; else elseBlock">
+              <p style="background-color: gainsboro">{{celda1[1]}}</p>                              
+          </div>                               
+          <ng-template #elseBlock>
+              <p>{{celda1[1]}}</p>              
+          </ng-template>                      
+        </td>        
       </tr>
 
-      <tr *ngFor="let fila_2 of fila2" >
-        <td *ngFor="let celda of fila_2">
-          {{celda}}
-        </td>
+      <tr *ngFor="let c_2 of c2">      
+        <td *ngFor="let celda2 of c_2">                    
+          <div *ngIf="celda2[0]; else elseBlock">
+              <p style="background-color: gainsboro">{{celda2[1]}}</p>      
+          </div>                               
+          <ng-template #elseBlock>
+              <p>{{celda2[1]}}</p>  
+          </ng-template>                      
+        </td>        
       </tr>
 
-      <tr *ngFor="let fila_3 of fila3" >
-        <td *ngFor="let celda of fila_3">
-          {{celda}}
-        </td>
+      <tr *ngFor="let c_3 of c3">      
+        <td *ngFor="let celda3 of c_3">            
+          <div *ngIf="celda3[0]; else elseBlock">
+              <p style="background-color: gainsboro">{{celda3[1]}}</p>      
+          </div>                               
+          <ng-template #elseBlock>
+              <p>{{celda3[1]}}</p>  
+          </ng-template>                      
+        </td>        
       </tr>
 
-      <tr *ngFor="let fila_4 of fila4" >
-        <td *ngFor="let celda of fila_4">
-          {{celda}}
-        </td>
-      </tr>
-
+      <tr *ngFor="let c_4 of c4">      
+        <td *ngFor="let celda4 of c_4">        
+          <div *ngIf="celda4[0]; else elseBlock">
+              <p style="background-color: gainsboro">{{celda4[1]}}</p>      
+          </div>                               
+          <ng-template #elseBlock>
+              <p>{{celda4[1]}}</p>  
+          </ng-template>                      
+        </td>        
+      </tr>      
     </tbody>  
   </table>
+
 </div>
-
-
-
 

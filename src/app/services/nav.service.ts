@@ -6,6 +6,8 @@ import { Acciones } from '../clases/Acciones';
 //import { Jugadores } from '../../clases/Jugadores';
 
 import { Router } from "@angular/router"
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,30 +17,21 @@ export class NavService {
   constructor(private router:Router) {           
    }
 
-  clickInicio() {    
-    //location.reload()
-    console.log("click inicio")    
-    
+  clickInicio() {        
+    console.log("click inicio")         
     //crear objeto: disparos y celdas
-    let casillas = new Grilla(10, [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16]])      
-    
+    let casillas = new Grilla(10, [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16]])          
     //asignar jugadores (but cazador) en posiciones aleatoriamente dentro de la grilla. Casilla 1 no incluida, para el cazador    
     let actores: string[] = ["wumpus", "pozo1", "pozo2", "oro"]
-    this.getJSONaleatorio(actores) 
-    
-    //posicionar cazador en casilla (1)        
-    this.getPosicion(1)         
-
+    this.getJSONaleatorio(actores)     
+    //posicionar cazador en casilla (1), suma 1 en la función            
+    this.getPosicion(1)             
     //acciones que se pueden realizar dentro de cada celda
     let accion = new Acciones()
-    accion.getAcciones()    
+    accion.getAcciones()        
   }    
   
-  getJSONaleatorio(actores_param) {   
-    //let suma = this.celda_cazador.reduce((a, b) => a + b, 0)   
-    //this.celda_cazador.splice(suma)         
-    //location.reload()
-    //
+  getJSONaleatorio(actores_param) {                       
     let aleatorias = [0,1,2,3]  //indice    
     let posicion = {}
     for (let asignar of actores_param) {
@@ -54,14 +47,27 @@ export class NavService {
     return posicion_json    
   }
 
+  //pasar valor de servicio a componente updated
+  //crear variable que observa un numero. $i indica que es u observable
+  public pos$ = new Subject<number>()
   //usamos un array como base de datos de la posicion. declarar fuera de la funcion
   celda_cazador: number[] = []    
-  getPosicion(casilla: number) {                  
+  getPosicion(casilla: number) {                      
     let celda = this.celda_cazador.push(casilla)                  
     //suma total del array      
     let suma = this.celda_cazador.reduce((a, b) => a + b, 0)                    
-    console.log("el cazador se encuentra en la casila: " + suma)    
-    return suma    
+    console.log("el cazador se encuentra en la casila (servicio): " + suma)
+    
+    //emitir evento de resultado
+    //this.pos$.next(0)    
+    this.pos$.next(suma)
+         
+    return suma
+  }
+  
+  //obtener el observable
+  getPosicion1$(): Observable<number> {    
+    return this.pos$.asObservable()    
   }
 
   clickLanzar() {
