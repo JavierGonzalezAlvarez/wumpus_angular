@@ -22,7 +22,7 @@ services:
     restart: always
     ports:
       - "250:80"
-  #    #- "443:443"
+    # - "443:443"
     volumes:
       - .nginx:/etc/nginx/conf.d
       - "${LOG_PATH}:/var/log/nginx"
