@@ -17,7 +17,6 @@ RUN npm install -g @angular/cli
 #ENV ANGULAR_PORT=80
 # start the app
 
-
 #CMD ng serve --host 0.0.0.0
 #CMD npm start
 CMD [ "npm", "start" ]

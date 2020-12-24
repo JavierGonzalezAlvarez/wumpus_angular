@@ -50,18 +50,16 @@ export class NavService {
   //pasar valor de servicio a componente updated
   //crear variable que observa un numero. $i indica que es u observable
   public pos$ = new Subject<number>()
+  
   //usamos un array como base de datos de la posicion. declarar fuera de la funcion
-  celda_cazador: number[] = []    
-  getPosicion(casilla: number) {                      
-    let celda = this.celda_cazador.push(casilla)                  
-    //suma total del array      
+  celda_cazador: number[] = []      
+  getPosicion(casilla: number) {    
+    let celda = this.celda_cazador.push(casilla)                     
     let suma = this.celda_cazador.reduce((a, b) => a + b, 0)                    
-    console.log("el cazador se encuentra en la casila (servicio): " + suma)
-    
-    //emitir evento de resultado
-    //this.pos$.next(0)    
+    console.log("el cazador se encuentra en la casilla (servicio): " + suma)    
+    //emitir evento de resultado    
     this.pos$.next(suma)
-         
+    //    
     return suma
   }
   
@@ -75,14 +73,20 @@ export class NavService {
   }
 
   clickAdelante() {
-    console.log("click adelante")
-    let celda = this.getPosicion(1)    
+    console.log("click adelante")                
+    let celda = this.getPosicion(0)
+    if (celda != 16) {          
+      let celda = this.getPosicion(1)        
+    }     
     //restricciones
   }
 
   clickAtras() {    
-    console.log("click atras")
-    let celda = this.getPosicion(-1)    
+    console.log("click atras")        
+    let celda = this.getPosicion(0)
+    if (celda != 0) {          
+      let celda = this.getPosicion(-1)    
+    }
     //restricciones
   }
 
@@ -110,7 +114,9 @@ export class NavService {
 
   clickBack() {    
     console.log("click back")
-    this.router.navigate(['/'])     
+    this.router.navigate(['/'])    
+    this.getPosicion1$() 
+    //getPosicion1$()
   }
 
   clickInstrucciones() {    
