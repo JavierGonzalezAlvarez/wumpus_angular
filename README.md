@@ -22,11 +22,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-Juego del wumpus
+# Juego del wumpus
 Version Front en Angular - existe una version creada en python en este mismo repositorio
 Autor: Javier González
 IDE: VSC
@@ -41,6 +37,15 @@ $ npm angular -g @angular/cli
 $ ng new wumpus --skipTests=true
 -routing: y
 -style: scss
+
+# pasos
+1.barra navegador, body y footer => OK
+2.pintar grilla => OK
+3.crear movimientos dentro de la grilla del cazador => OK
+4.posiciones de los actores al inicio de partida => OK
+5.posición del cazador respecto al resto de actores => OK
+6.mensajes personalizados => PENDIENTE
+7.contador de flechas y lanzar flechas => PENDIENTE
 
 #  crear componentes header, body y footer
 cd src/app
@@ -62,7 +67,7 @@ index.html
 # crear componente help
 $ ng g component components/help
 
-# instalar materuial design
+# instalar material design
 ng add @angular/material
 -indigo/pink
 -y

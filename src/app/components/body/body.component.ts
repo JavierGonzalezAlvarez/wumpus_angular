@@ -1,7 +1,11 @@
-import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
+//import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { assert } from 'console';
+import { element } from 'protractor';
 //import { Grilla } from '../../clases/Grilla';
 //import { Jugadores } from '../../clases/Jugadores';
+
+import { Acciones } from '../../clases/Acciones';
 
 import { MensajesService } from "../../services/mensajes.service";
 import { NavService } from "../../services/nav.service";
@@ -23,27 +27,23 @@ export class BodyComponent implements OnInit, OnDestroy {
     c4 = []
     sum = []
     //almacenar el observable
-    pos$: number    
+    pos$: number  
+    posJson$: String      
     //p: number
     //
-    isTrue: boolean = true
+    isTrue: boolean = true    
     
     constructor(public mensajesService: MensajesService, public navService: NavService) {                    
-      
+            
       let activado: boolean = false            
       let isTrue = true
-      
-      //let p = this.navService.getPosicion(3)           
-      //this.ngOnDestroy
-      
-      //let p: number
-      
+            
       this.navService.getPosicion1$().subscribe(data => {
         this.pos$=data        
         console.log("valor observable en componente :" + this.pos$)                            
         
         let p = this.pos$
-        console.log(p)                                     
+        //console.log(p)                                     
   
         let numbersF1 = [[false, 1], [false, 2], [false, 3], [false, 4]]
         let numbersF2 = [[false, 5], [false, 6], [false, 7], [false, 8]]
@@ -290,18 +290,63 @@ export class BodyComponent implements OnInit, OnDestroy {
           this.c4.push(numbersF4)            
           console.log(this.c4)         
           console.log("pintada la celda: "+ p + " como '" + activado +"'")            
-        }
-  
+        }  
       })
     
-
-  }
-
-  //mensajes    
+  }  
     
   ngOnInit(): void {                     
-  }
 
+    //posicion del resto de actores. Se establece de forma aleatoria
+    this.navService.getPosicionJson1$().subscribe(data => {
+      this.posJson$=data        
+      //console.log("posicion jugadores (componente): " + this.posJson$)                                    
+    })
+
+    //posicion actual del cazador
+    this.navService.getPosicion1$().subscribe(data => {
+      this.pos$=data        
+      console.log("valor observable posicion cazador (componente): " + this.pos$)                                    
+      
+      //¿A qué casillas puede ir el cazador en la posición que está?
+      let accion = new Acciones()
+      let array_accion = accion.getAcciones()
+      
+      //buscar casillas a las que puede moverse
+      let resultado = array_accion.find(x => x.id == this.pos$)
+      console.log(resultado)
+      
+      //posicion del resto de jugadores
+      console.log(this.posJson$)                                    
+      let array_posicion_resto_actores = this.posJson$     
+
+      //recorrer el array de acciones posible en función de la posicion del cazador
+      for (let i of resultado.acciones) {      
+        console.log("desde casilla: " + this.pos$ + " -> se puede ir a casilla: " + i)  //ok                            
+        for (let j of array_posicion_resto_actores) {                        
+            //console.log(j[0])
+            //console.log(Object.values(j[0]).find(el1 => "id"))                                                                       
+            let id = Object.values(j[0]).find(el => "id")
+            //let array =  Object.values(j[0])
+            //let p = array.forEach(element => console.log(element));                                                        
+            
+            if (String(i) == id) {                                                                              
+              console.log("coincidencia")                                                       
+              //quien esta cerca?                                   
+              console.log("actor: " + j[0]["actor"] + " está en la casilla => " + String(i))
+              alert("cuidado!, el " + j[0]["actor"] + " está cerca")
+
+              //mensajes posibles personalizados, según posicion del cazador y el resto de actores. Servicio  
+              //let array_mensaje = this.mensajesService.getMensajes() 
+              //let resultado_mensaje = array_mensaje.find(x => x.id == this.pos$)                                
+            } 
+                       
+        }
+        
+      }
+    })
+    
+  }
 
   ngOnDestroy(): void {             
   }

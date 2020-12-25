@@ -26,25 +26,55 @@ export class NavService {
     this.getJSONaleatorio(actores)     
     //posicionar cazador en casilla (1), suma 1 en la función            
     this.getPosicion(1)             
-    //acciones que se pueden realizar dentro de cada celda
-    let accion = new Acciones()
-    accion.getAcciones()        
+    //acciones que se pueden realizar dentro de cada celda. Instanciar Clase
+    //se utiliza para comparar con posiciones del resto de actores
+    //let accion = new Acciones()
+    //accion.getAcciones()        
   }    
   
+  //en caso de json
+  //public posJson$ = new Subject<String>()
+
+  //en caso de array
+  public posJson$ = new Subject<any>()
+ 
   getJSONaleatorio(actores_param) {                       
     let aleatorias = [0,1,2,3]  //indice    
-    let posicion = {}
-    for (let asignar of actores_param) {
-      console.log(asignar)      
+    //en caso de Json
+    //let posicion = {}
+    
+    //con array
+    //let posicion = [] as any
+    let posicion: Array<number | any> = []    
+    for (let asignar of actores_param) {          
       //const numero_aleatorio = Math.floor(Math.random() * (aleatorias.length - 1)) + 0;           
       const numero_aleatorio = Math.floor(Math.random() * 15) + 2;           
-      //mapeo del array en un objeto      
-      aleatorias.forEach(item => posicion[numero_aleatorio] = asignar);      
+      //mapeo del array en un objeto (json)
+      //aleatorias.forEach(item => posicion[numero_aleatorio] = asignar);                
+      let item: Array<number | any> = [
+        {id: numero_aleatorio, actor: asignar}
+      ]      
+      posicion.push(item)    
+      //console.log(posicion)      
     } 
-    //pasar a json    
-    let posicion_json = JSON.stringify(posicion)                 
-    console.log("actores en posiciones: "+ posicion_json)
+
+    //opcion1: pasar a json    
+      //let posicion_json = JSON.stringify(posicion)                     
+      //console.log("actores en posiciones: "+ posicion_json)
+
+    //Estrutura necesaria (DB no relacional) => {id:1, actor: "pozo1"},
+    //opcion2: pasar a array
+    let posicion_json = posicion
+    console.log(posicion_json)
+    //observable
+    this.posJson$.next(posicion_json)
+    //
     return posicion_json    
+  }
+
+  //obtener el observable
+  getPosicionJson1$(): Observable<String> {    
+    return this.posJson$.asObservable()    
   }
 
   //pasar valor de servicio a componente updated
@@ -57,9 +87,10 @@ export class NavService {
     let celda = this.celda_cazador.push(casilla)                     
     let suma = this.celda_cazador.reduce((a, b) => a + b, 0)                    
     console.log("el cazador se encuentra en la casilla (servicio): " + suma)    
-    //emitir evento de resultado    
-    this.pos$.next(suma)
-    //    
+    //emitir evento de resultado, lo enviamos a la grilla
+    //
+    this.pos$.next(suma)    
+    //
     return suma
   }
   
@@ -78,16 +109,14 @@ export class NavService {
     if (celda != 16) {          
       let celda = this.getPosicion(1)        
     }     
-    //restricciones
   }
 
   clickAtras() {    
     console.log("click atras")        
     let celda = this.getPosicion(0)
-    if (celda != 0) {          
+    if (celda != 1) {          
       let celda = this.getPosicion(-1)    
-    }
-    //restricciones
+    }    
   }
 
   clickAbajo() {    
@@ -115,8 +144,7 @@ export class NavService {
   clickBack() {    
     console.log("click back")
     this.router.navigate(['/'])    
-    this.getPosicion1$() 
-    //getPosicion1$()
+    this.getPosicion1$()     
   }
 
   clickInstrucciones() {    
@@ -130,4 +158,7 @@ export class NavService {
   }
 
 }
+
+
+
 
