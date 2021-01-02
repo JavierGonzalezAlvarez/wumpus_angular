@@ -78,7 +78,7 @@ export class NavService {
   }
 
   //pasar valor de servicio a componente updated
-  //crear variable que observa un numero. $i indica que es u observable
+  //crear variable que observa un numero. $i indica que es un observable
   public pos$ = new Subject<number>()
   
   //usamos un array como base de datos de la posicion. declarar fuera de la funcion

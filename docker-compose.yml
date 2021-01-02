@@ -1,4 +1,5 @@
 version: "3.5"
+
 services:
   angular:
     build: .
@@ -9,24 +10,25 @@ services:
     #env_file: .env
     ports:
       - '3200:3200'
-    command: > 
-        bash -c "npm install && ng serve --host 0.0.0.0 --port 3200"
-    #command: "npm start"
+      # ip para ejecutar desde el navegador con docker la app      
+    command: >       
+        bash -c "npm install && ng serve --host 0.0.0.0 --port 3200"      
     networks:
       - angular-nginx-networks
  
   nginx:
     image: nginx:1.19
     container_name: nginx
-    env_file: .env
+    #env_file: .env
     restart: always
     ports:
-      - "250:80"
+      - "252:80"
     # - "443:443"
     volumes:
       - .nginx:/etc/nginx/conf.d
-      - "${LOG_PATH}:/var/log/nginx"
-  #    #- /etc/letsencrypt:/etc/letsencrypt
+      - ./logs:/var/log/nginx
+      #- "${LOG_PATH}:/var/log/nginx"
+      #- /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - angular
     networks:

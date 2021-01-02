@@ -39,13 +39,13 @@ $ ng new wumpus --skipTests=true
 -style: scss
 
 # pasos
-1.barra navegador, body y footer => OK
-2.pintar grilla => OK
-3.crear movimientos dentro de la grilla del cazador => OK
-4.posiciones de los actores al inicio de partida => OK
-5.posición del cazador respecto al resto de actores => OK
-6.mensajes personalizados => PENDIENTE
-7.contador de flechas y lanzar flechas => PENDIENTE
+1. barra navegador, body y footer => OK
+2. pintar grilla => OK
+3. crear movimientos dentro de la grilla del cazador => OK
+4. posiciones de los actores al inicio de partida => OK
+5. posición del cazador respecto al resto de actores => OK
+6. mensajes personalizados => PENDIENTE
+7. contador de flechas y lanzar flechas => PENDIENTE
 
 #  crear componentes header, body y footer
 cd src/app
@@ -94,23 +94,26 @@ $ src/app/services/ng generate service nav
 $ src/app/services/ng generate service mensajes
 
 
-dockerizacion - crear network
+## dockerizacion - crear network
 -------------------------------------
+crear network:
 $ docker network create angular-nginx-networks
-crear el dockerfile => Dockerfile
-crear el docker-compose=>  docker-compose.yml
-ejecutar servicios docker-compose => $ docker-compose up --build -d 
-detener servicios docker-compose => docker-compose down
+
+comandos:
+$ docker-compose up --build -d 
+$ docker-compose start
+$ docker-compose stop
+$ docker-compose down
 
 crear imagen desde docker (no docker-compose)
 ------------------------------------------------
-docker build -t angular_wumpus .
+$ docker build -t angular_wumpus .
 
 listar imagenes
 ----------------
-docker images
+$ docker images
 
-entrar en el contenedor
+## entrar en el contenedor
 ----------------------------
 docker container ls
 docker exec -i -t container_id /bin/bash
@@ -118,19 +121,23 @@ docker exec -i -t container_id /bin/bash
 docker exec -i -t 5b04716490e8 /bin/bash
 dentro del contenedor=> ng serve
 
-puerto 3200 => localhost:3200
+## Desde el navegador, una vez arrancado docker-compose start
+--------------------------------------------------------------
+http://localhost:3200/
 
 en caso de que el puerto 4200 este en uso:
 ----------------------------------------------
 matar el proceso anterior o cambiar el puerto por defecto o cambiar de puerto en docker o en comando:
 $ ng serve --port 4201
 
-eliminar todas las imagenes
+## eliminar todas con contenedores
+--------------------------------
+docker rm $(docker ps -a -q) -f
+
+## eliminar todas las imagenes
 -----------------------------
 docker rmi $(docker images -q) 
 
-eliminar todas con contenedores
---------------------------------
-docker rm $(docker ps -a -q) -f
+
 
 
