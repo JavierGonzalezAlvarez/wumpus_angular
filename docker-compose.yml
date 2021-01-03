@@ -10,9 +10,10 @@ services:
     #env_file: .env
     ports:
       - '3200:3200'
-      # ip para ejecutar desde el navegador con docker la app      
-    command: >       
-        bash -c "npm install && ng serve --host 0.0.0.0 --port 3200"      
+      # ip para ejecutar la app desde el navegador con docker
+      # opcion de indicar aquí la url
+    #command: >       
+    #    bash -c "npm install && ng serve --host 0.0.0.0 --port 3200"      
     networks:
       - angular-nginx-networks
  

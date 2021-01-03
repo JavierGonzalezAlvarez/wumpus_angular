@@ -121,8 +121,8 @@ docker exec -i -t container_id /bin/bash
 docker exec -i -t 5b04716490e8 /bin/bash
 dentro del contenedor=> ng serve
 
-## Desde el navegador, una vez arrancado docker-compose start
---------------------------------------------------------------
+## Desde el navegador, una vez arrancado docker: docker-compose start
+----------------------------------------------------------------------
 http://localhost:3200/
 
 en caso de que el puerto 4200 este en uso:
@@ -139,5 +139,8 @@ docker rm $(docker ps -a -q) -f
 docker rmi $(docker images -q) 
 
 
+## despliegue
+----------------
+$ ng build
 
 
