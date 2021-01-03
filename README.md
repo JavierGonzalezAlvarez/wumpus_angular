@@ -138,9 +138,17 @@ docker rm $(docker ps -a -q) -f
 -----------------------------
 docker rmi $(docker images -q) 
 
-
 ## despliegue
 ----------------
-$ ng build
+$ ng build --prod
 
+## IP del juego en instancia de aws- ec2
+--------------------------------------------
+http://18.219.17.118/
+
+## otra opcion: instalar pm2 para ejecutar npm start directamente
+------------------------------------------------------------------
+$ sudo apt install npm
+$ sudo npm install pm2 -g
+$ sudo pm2 start npm -- start
 

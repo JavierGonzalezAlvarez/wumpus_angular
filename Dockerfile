@@ -20,7 +20,8 @@ RUN npm install -g @angular/cli
 
 #CMD npm start
 
-#opcion de indicar aquí la url
+#opcion de indicar aquí la url, acepta cualquier ip en el puerto 3200
+# se pude cambiar en package.json también
 CMD ng serve --host 0.0.0.0 --port 3200
 
 #CMD [ "npm", "start" ]
