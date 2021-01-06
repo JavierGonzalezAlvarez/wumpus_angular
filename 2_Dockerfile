@@ -1,0 +1,20 @@
+#angular en docker únicamente
+
+FROM node:13.3.0 
+
+RUN mkdir -p /code
+WORKDIR /code
+
+#copiar todo a directorio code
+COPY . /code
+
+#instalar dependencias del proyecto
+#RUN npm install
+RUN npm install -g @angular/cli #para ejecutar ng
+
+RUN ng build --prod
+ENV NODE_ENV=production
+
+#opcion de indicar aquí la url, acepta cualquier ip en el puerto 3200
+# o se pude cambiar en package.json también
+CMD ng serve --host 0.0.0.0 --port 3200

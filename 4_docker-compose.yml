@@ -1,0 +1,17 @@
+version: "3"
+
+services: 
+  nginx:
+    build: .    
+    container_name: nginx_wumpus    
+    restart: always
+    ports:
+      - "250:80"
+    # - "443:443"
+    #volumes:      
+      #mapeo del volumen/directorio de docker. cambios actualizados      
+      #- .nginx:/etc/nginx/conf.d      
+      #- .html:/usr/share/nginx/html
+      #- ./logs:/var/log/nginx      
+      #- /etc/letsencrypt:/etc/letsencrypt        
+  

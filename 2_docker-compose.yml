@@ -1,0 +1,22 @@
+#angular en docker únicamente
+version: "3"
+
+services:
+  angular:
+    build: .
+    container_name: angular
+    #restart: always
+    volumes: # Volume binding
+        - './docker_angular:/usr/src/app'     
+    ports:
+      - '3200:3200'
+      # ip para ejecutar la app desde el navegador con docker
+      # opcion de indicar aquí la url
+    #command: >       
+    #    bash -c "npm install && ng serve --host 0.0.0.0 --port 3200"      
+    networks:
+      - angular-nginx-networks
+ 
+networks:
+    angular-nginx-networks:
+ 

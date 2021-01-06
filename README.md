@@ -93,27 +93,25 @@ src/app/services
 $ src/app/services/ng generate service nav
 $ src/app/services/ng generate service mensajes
 
+# producción
 
-## dockerizacion - crear network
--------------------------------------
-crear network:
+-----------------------------------
+-----------------------------------
+## dockerizacion opcion1 - nginx.
+----------------------------------------------------------
+subir la carpeta del proyecto a /var/www/html de nginx en instancia de aws
+
+## dockerizacion opcion2 - docker-compose con el servidor de angular (no para producción)
+-----------------------------------------------------------------------
+docker-compose con el server de angular
+crear network (opcional):
 $ docker network create angular-nginx-networks
 
-comandos:
-$ docker-compose up --build -d 
-$ docker-compose start
-$ docker-compose stop
-$ docker-compose down
+ficheros:
+2_Dockerfile
+2_docker-compose.yml
 
-crear imagen desde docker (no docker-compose)
-------------------------------------------------
-$ docker build -t angular_wumpus .
-
-listar imagenes
-----------------
-$ docker images
-
-## entrar en el contenedor
+entrar en el contenedor
 ----------------------------
 docker container ls
 docker exec -i -t container_id /bin/bash
@@ -121,34 +119,86 @@ docker exec -i -t container_id /bin/bash
 docker exec -i -t 5b04716490e8 /bin/bash
 dentro del contenedor=> ng serve
 
-## Desde el navegador, una vez arrancado docker: docker-compose start
+desde el navegador, una vez arrancado docker: docker-compose start
 ----------------------------------------------------------------------
 http://localhost:3200/
 
-en caso de que el puerto 4200 este en uso:
+en caso de que el puerto 4200 esté en uso:
 ----------------------------------------------
 matar el proceso anterior o cambiar el puerto por defecto o cambiar de puerto en docker o en comando:
 $ ng serve --port 4201
 
-## eliminar todas con contenedores
---------------------------------
+## dockerizacion opcion3 - dockerfile. No es necesario crear una network
+-------------------------------------------------------------------------
+ficheros:
+3_Dockerfile
+nginx/3_default.conf
+
+dockerfile (node y nginx dentro)
+
+#crear la imagen. nombre de la imagen: angular-docker
+$ docker build -t angular-docker .
+
+#crear un contenedor por primera vez. nombre del contenedor: wumpus, sobre la anterior imagen. -d: ejecución en segundo plano
+$ docker container run -d -p 80:80 --name wumpus angular-docker
+$ docker stop wumpus
+$ docker start wumpus
+
+http://localhost:80
+
+## dockerizacion opcion4 - docker-compose.
+--------------------------------------------------------------------
+docker-compose con nginx, ficheros:
+4_Dockerfile
+4_docker-compose.yml
+nginx/4_default.conf
+
+
+crear app en produccion:
+$ ng build --prod
+
+comandos:
+$ docker-compose up --build -d 
+$ docker-compose start
+$ docker-compose stop
+$ docker-compose down
+
+http://localhost:250
+
+-----------------------------------
+-----------------------------------
+
+
+
+# eliminar todos los contenedores
+-----------------------------------
 docker rm $(docker ps -a -q) -f
 
-## eliminar todas las imagenes
------------------------------
+# eliminar todas las imagenes
+-------------------------------
 docker rmi $(docker images -q) 
 
-## despliegue
+# eliminar volumenes rotos
+----------------------------
+docker volume prune
+
+# despliegue
 ----------------
 $ ng build --prod
 
-## IP del juego en instancia de aws- ec2
+
+## IPs del juego en instancias de aws- ec2
 --------------------------------------------
 http://18.219.17.118/
+
 
 ## otra opcion: instalar pm2 para ejecutar npm start directamente
 ------------------------------------------------------------------
 $ sudo apt install npm
 $ sudo npm install pm2 -g
 $ sudo pm2 start npm -- start
+
+si error: spawn ENOENT
+angular.json, añadir:
+    "port": 80,
 

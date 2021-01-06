@@ -1,0 +1,9 @@
+#docker en nginx para producción (aws)
+FROM nginx:latest
+
+ARG APP=wumpus
+ENV APP ${APP}
+
+WORKDIR /usr/share/nginx/html
+
+COPY /dist/${APP}/* /usr/share/nginx/html/

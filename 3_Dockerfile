@@ -1,0 +1,44 @@
+#docker en nginx para producción (aws)
+# alias => node
+FROM node:13.3.0 as node  
+
+ARG ENV=prod
+ARG APP=wumpus
+
+ENV ENV ${ENV}
+ENV APP ${APP}
+
+ENV NODE_ENV=production
+
+RUN mkdir -p /code
+WORKDIR /code
+
+#copiar todo a directorio code
+COPY . /code
+
+#instalar dependencias del proyecto
+RUN npm install
+#RUN npm ci  #borra node_modules
+RUN npm run build --prod
+
+#dos opciones:
+#RUN mv /code/dist/${APP}/* /code/dist/
+RUN cp -r /code/dist/${APP}/* /code/dist/
+
+#FROM nginx:1.13.8-alpine
+FROM nginx:latest
+
+COPY --from=node /code/dist/ /usr/share/nginx/html
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf                        
+
+#--------------------------------------------------
+#crear la imagen. nombre de la imagen: angular-docker
+# docker build -t angular-docker .
+
+#crear un contenedor por primera vez. nombre del contenedor: wumpus, sobre la anterior imagen
+# -d: ejecución en segundo plano
+# docker container run -d -p 80:80 --name wumpus angular-docker
+# docker stop wumpus
+# docker start wumpus
+
+#http://localhost:80
